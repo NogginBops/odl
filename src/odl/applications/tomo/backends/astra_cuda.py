@@ -318,7 +318,7 @@ class AstraCudaImpl:
             if self.proj_ndim == 2:
                 proj_data = proj_data.data[None]
             elif self.proj_ndim == 3:
-                proj_data = proj_data.data.__array_namespace__().permute_dims(proj_data, self.transpose_tuple)
+                proj_data = proj_data.data.__array_namespace__().permute_dims(proj_data.data, self.transpose_tuple)
             else:
                 raise NotImplementedError
 
