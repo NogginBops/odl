@@ -113,8 +113,12 @@ class AstraCudaImpl:
 
         if self.geometry.ndim == 3:
             if vol_space.impl == 'numpy':
-                self.transpose_tuple = (1,0,2)
+                self.transpose_tuple = (1,0,2) if self.geometry.det_curvature_radius is None else (2, 0, 1)
             elif vol_space.impl == 'pytorch':
+                # FIXME: if self.geometry.det_curvature_radius is None
+                # We can't use a single PyTorch transpose...
+                if self.geometry.det_curvature_radius is not None:
+                    raise NotImplementedError("Curved detectors currently do not support pytorch")
                 self.transpose_tuple = (1,0)
             else:
                 raise NotImplementedError("Not implemented for another backend")
