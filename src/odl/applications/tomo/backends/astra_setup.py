@@ -423,7 +423,7 @@ def astra_cyl_conebeam_3d_geom_to_vec(geometry:DivergentBeamGeometry):
 
     # ASTRA has (z, y, x) axis convention, in contrast to (x, y, z) in ODL,
     # so we need to adapt to this by changing the order.
-    vectors = vectors[:, ODL_TO_ASTRA_INDEX_PERMUTATIONS]
+    vectors = vectors[:, [*ODL_TO_ASTRA_INDEX_PERMUTATIONS, 12]]
 
     return vectors
 
