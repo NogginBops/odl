@@ -208,7 +208,7 @@ class AstraCudaImpl:
                     )
                 proj_data = out.data[None] if self.proj_ndim == 2 else out.data
                 if self.geometry.ndim == 3:
-                    proj_data = proj_data.__array_namespace__().permute_dims(proj_data, self.transpose_tuple)
+                    proj_data = self._proj_space.array_namespace.permute_dims(proj_data, self.transpose_tuple)
 
             else:
                 proj_data = empty(
@@ -244,7 +244,7 @@ class AstraCudaImpl:
             proj_data = (
                 proj_data[0]
                 if self.geometry.ndim == 2
-                else proj_data.__array_namespace__().permute_dims(proj_data, self.transpose_tuple)
+                else self._proj_space.array_namespace.permute_dims(proj_data, self.transpose_tuple)
             )
 
             if out is not None:
@@ -318,7 +318,7 @@ class AstraCudaImpl:
             if self.proj_ndim == 2:
                 proj_data = proj_data.data[None]
             elif self.proj_ndim == 3:
-                proj_data = proj_data.data.__array_namespace__().permute_dims(proj_data.data, self.transpose_tuple)
+                proj_data = self._proj_space.array_namespace.permute_dims(proj_data.data, self.transpose_tuple)
             else:
                 raise NotImplementedError
 
