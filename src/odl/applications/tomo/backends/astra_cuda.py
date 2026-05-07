@@ -113,6 +113,7 @@ class AstraCudaImpl:
 
         if self.geometry.ndim == 3:
             self.transpose_tuple = (1,0,2) if self.geometry.det_curvature_radius is None else (2, 0, 1)
+            self.inverse_transpose_tuple = (1,0,2) if self.geometry.det_curvature_radius is None else (1, 2, 0)
 
         self.fp_scaling_factor = astra_cuda_fp_scaling_factor(self.geometry)
         self.bp_scaling_factor = astra_cuda_bp_scaling_factor(
@@ -244,7 +245,7 @@ class AstraCudaImpl:
             proj_data = (
                 proj_data[0]
                 if self.geometry.ndim == 2
-                else self._proj_space.array_namespace.permute_dims(proj_data, self.transpose_tuple)
+                else self._proj_space.array_namespace.permute_dims(proj_data, self.invserse_transpose_tuple)
             )
 
             if out is not None:
