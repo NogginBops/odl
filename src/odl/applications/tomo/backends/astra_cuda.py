@@ -245,7 +245,7 @@ class AstraCudaImpl:
             proj_data = (
                 proj_data[0]
                 if self.geometry.ndim == 2
-                else self._proj_space.array_namespace.permute_dims(proj_data, self.invserse_transpose_tuple)
+                else self._proj_space.array_namespace.permute_dims(proj_data, self.inverse_transpose_tuple)
             )
 
             if out is not None:
