@@ -358,7 +358,7 @@ def astra_conebeam_3d_geom_to_vec(geometry:Geometry):
 
     return vectors
 
-def astra_cyl_conebeam_3d_geom_to_vec(geometry:DivergentBeamGeometry):
+def astra_cyl_conebeam_3d_geom_to_vec(geometry:ConeBeamGeometry):
     """Create vectors for ASTRA projection geometries from ODL geometry.
 
     The 3D vectors are used to create an ASTRA projection geometry for
@@ -416,7 +416,7 @@ def astra_cyl_conebeam_3d_geom_to_vec(geometry:DivergentBeamGeometry):
     # memory layout. For cylindrical detectors this is (currently) not possible
     # since both ODL and Astra have the v direction along the axial direction.
     vectors[:, 6:9] = det_axes[0] * px_sizes[0] * geometry.det_curvature_radius
-    vectors[:, 9:12] = det_axes[1] * px_sizes[1]
+    vectors[:, 9:12] = det_axes[1] * px_sizes[1] * 2
 
     # detector curvature radius
     vectors[:, 12] = geometry.det_curvature_radius
